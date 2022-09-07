@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ionicvue-dev-172708-authRole",
+      "UnauthRoleArn": "arn:aws:iam::604126380041:role/amplify-ionicvue-dev-172708-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::604126380041:role/amplify-ionicvue-dev-172708-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-ionicvue-dev-172708-deployment",
+      "UnauthRoleName": "amplify-ionicvue-dev-172708-unauthRole",
+      "StackName": "amplify-ionicvue-dev-172708",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:604126380041:stack/amplify-ionicvue-dev-172708/dd497e70-2e86-11ed-bb6c-0a96d128f927",
+      "AmplifyAppId": "d1lg7v16fgqo4i"
+    },
+    "categories": {
+      "auth": {
+        "ionicvue078764ef": {}
+      }
+    }
+  }
+}

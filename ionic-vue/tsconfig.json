@@ -33,7 +33,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/graphql/mutations.js", "aws-exports.ts"  ],
   "exclude": [
     "node_modules"
   ]

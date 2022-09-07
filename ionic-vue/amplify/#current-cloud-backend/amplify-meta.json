@@ -1,0 +1,87 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ionicvue-dev-172708-authRole",
+      "UnauthRoleArn": "arn:aws:iam::604126380041:role/amplify-ionicvue-dev-172708-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::604126380041:role/amplify-ionicvue-dev-172708-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-ionicvue-dev-172708-deployment",
+      "UnauthRoleName": "amplify-ionicvue-dev-172708-unauthRole",
+      "StackName": "amplify-ionicvue-dev-172708",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:604126380041:stack/amplify-ionicvue-dev-172708/dd497e70-2e86-11ed-bb6c-0a96d128f927",
+      "AmplifyAppId": "d1lg7v16fgqo4i"
+    }
+  },
+  "auth": {
+    "ionicvue078764ef": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-ionicvue-dev-172708-deployment/amplify-cfn-templates/auth/ionicvue078764ef-cloudformation-template.json",
+        "logicalId": "authionicvue078764ef"
+      },
+      "lastPushTimeStamp": "2022-09-07T09:56:14.874Z",
+      "output": {
+        "UserPoolId": "ap-northeast-1_XkdWf0pYU",
+        "AppClientIDWeb": "quurr4p03alq7gdkpb6dcflsl",
+        "AppClientID": "68bt5nudf6mg102ie2469g3nla",
+        "IdentityPoolId": "ap-northeast-1:e10e1887-83ff-4b91-b8df-683ce829a86e",
+        "UserPoolArn": "arn:aws:cognito-idp:ap-northeast-1:604126380041:userpool/ap-northeast-1_XkdWf0pYU",
+        "IdentityPoolName": "ionicvue078764ef_identitypool_078764ef__dev",
+        "UserPoolName": "ionicvue078764ef_userpool_078764ef"
+      },
+      "lastPushDirHash": "CJZ1cOd4JkXQskYNog83Hq8g6kI="
+    }
+  },
+  "api": {
+    "ionicvue": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 365,
+              "apiKeyExpirationDate": "2023-09-07T09:44:35.933Z",
+              "description": "demo"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        },
+        "GraphQLAPIIdOutput": "7jmksw2vzvh77iup4gyj6hk7jq",
+        "GraphQLAPIEndpointOutput": "https://tft4xiqffzclfephmn4tsdcy2q.appsync-api.ap-northeast-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-xth7bt6mxvgrviciy4jxuerbra"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-ionicvue-dev-172708-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiionicvue"
+      },
+      "lastPushTimeStamp": "2022-09-07T09:56:17.360Z",
+      "lastPushDirHash": "ZR0tmG0CSdWCKbvLCMmcV4o6h2M="
+    }
+  }
+}

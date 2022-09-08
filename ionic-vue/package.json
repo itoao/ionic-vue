@@ -8,11 +8,13 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "build:ios": "ionic cap copy & ionic cap open ios",
-    "build:android": "ionic cap copy & ionic cap open android"
+    "build:ios": "ionic cap copy &&ionic cap open ios",
+    "build:android": "ionic cap copy && ionic cap open android",
+    "build:electron": "ionic cap copy && ionic cap open electron"
   },
   "dependencies": {
     "@aws-amplify/ui-vue": "^2.4.20",
+    "@capacitor-community/electron": "^4.1.2",
     "@capacitor/android": "^4.1.0",
     "@capacitor/app": "4.0.1",
     "@capacitor/core": "4.1.0",

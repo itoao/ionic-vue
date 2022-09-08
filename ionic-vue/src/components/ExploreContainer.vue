@@ -10,7 +10,7 @@
         <h1>Todo App</h1>
         <input type="text" v-model="taskName" placeholder="Todo name">
         <button @click="createTodos">Create Todo</button>
-    </div>
+      </div>
     </template>
   </authenticator>
 </template>
@@ -19,7 +19,7 @@
   import { API } from 'aws-amplify';
 import { createTodo } from '../graphql/mutations';
 
-import { defineComponent, ref, reactive } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { Authenticator } from "@aws-amplify/ui-vue";
 import { IonButton } from '@ionic/vue';
 import "@aws-amplify/ui-vue/styles.css";

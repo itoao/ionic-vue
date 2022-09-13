@@ -1,3 +1,4 @@
+/* tslint:disable */
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
@@ -51,6 +52,7 @@ export const createChat = /* GraphQL */ `
     createChat(input: $input, condition: $condition) {
       id
       content
+      owner
       createdAt
       updatedAt
     }
@@ -64,6 +66,7 @@ export const updateChat = /* GraphQL */ `
     updateChat(input: $input, condition: $condition) {
       id
       content
+      owner
       createdAt
       updatedAt
     }
@@ -77,6 +80,7 @@ export const deleteChat = /* GraphQL */ `
     deleteChat(input: $input, condition: $condition) {
       id
       content
+      owner
       createdAt
       updatedAt
     }

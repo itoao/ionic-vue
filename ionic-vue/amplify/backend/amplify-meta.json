@@ -42,7 +42,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ionicvue-dev-172708-deployment/amplify-cfn-templates/auth/ionicvue078764ef-cloudformation-template.json",
         "logicalId": "authionicvue078764ef"
       },
-      "lastPushTimeStamp": "2022-09-13T06:12:10.628Z",
+      "lastPushTimeStamp": "2022-09-13T08:57:12.033Z",
       "output": {
         "UserPoolId": "ap-northeast-1_XkdWf0pYU",
         "AppClientIDWeb": "quurr4p03alq7gdkpb6dcflsl",
@@ -66,7 +66,7 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 365,
-              "apiKeyExpirationDate": "2023-09-13T06:07:10.205Z",
+              "apiKeyExpirationDate": "2023-09-13T08:53:20.162Z",
               "description": "demo"
             }
           },
@@ -80,8 +80,8 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ionicvue-dev-172708-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiionicvue"
       },
-      "lastPushTimeStamp": "2022-09-13T06:12:12.835Z",
-      "lastPushDirHash": "p36nbwqDArlDXBJxkA7D09UwCI0="
+      "lastPushTimeStamp": "2022-09-13T08:57:15.419Z",
+      "lastPushDirHash": "Eg8xjSacpaiSxVMfRCQLnMh69PA="
     }
   }
 }

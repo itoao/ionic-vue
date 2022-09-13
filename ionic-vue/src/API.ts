@@ -75,6 +75,35 @@ export type DeleteTodoInput = {
   id: string,
 };
 
+export type CreateChatInput = {
+  id?: string | null,
+  content?: string | null,
+};
+
+export type ModelChatConditionInput = {
+  content?: ModelStringInput | null,
+  and?: Array< ModelChatConditionInput | null > | null,
+  or?: Array< ModelChatConditionInput | null > | null,
+  not?: ModelChatConditionInput | null,
+};
+
+export type Chat = {
+  __typename: "Chat",
+  id: string,
+  content?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateChatInput = {
+  id: string,
+  content?: string | null,
+};
+
+export type DeleteChatInput = {
+  id: string,
+};
+
 export type ModelTodoFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -103,6 +132,20 @@ export type ModelIDInput = {
 export type ModelTodoConnection = {
   __typename: "ModelTodoConnection",
   items:  Array<Todo | null >,
+  nextToken?: string | null,
+};
+
+export type ModelChatFilterInput = {
+  id?: ModelIDInput | null,
+  content?: ModelStringInput | null,
+  and?: Array< ModelChatFilterInput | null > | null,
+  or?: Array< ModelChatFilterInput | null > | null,
+  not?: ModelChatFilterInput | null,
+};
+
+export type ModelChatConnection = {
+  __typename: "ModelChatConnection",
+  items:  Array<Chat | null >,
   nextToken?: string | null,
 };
 
@@ -149,14 +192,6 @@ export type ModelSubscriptionChatFilterInput = {
   content?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionChatFilterInput | null > | null,
   or?: Array< ModelSubscriptionChatFilterInput | null > | null,
-};
-
-export type Chat = {
-  __typename: "Chat",
-  id: string,
-  content?: string | null,
-  createdAt: string,
-  updatedAt: string,
 };
 
 export type CreateTodoMutationVariables = {
@@ -207,6 +242,51 @@ export type DeleteTodoMutation = {
   } | null,
 };
 
+export type CreateChatMutationVariables = {
+  input: CreateChatInput,
+  condition?: ModelChatConditionInput | null,
+};
+
+export type CreateChatMutation = {
+  createChat?:  {
+    __typename: "Chat",
+    id: string,
+    content?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateChatMutationVariables = {
+  input: UpdateChatInput,
+  condition?: ModelChatConditionInput | null,
+};
+
+export type UpdateChatMutation = {
+  updateChat?:  {
+    __typename: "Chat",
+    id: string,
+    content?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteChatMutationVariables = {
+  input: DeleteChatInput,
+  condition?: ModelChatConditionInput | null,
+};
+
+export type DeleteChatMutation = {
+  deleteChat?:  {
+    __typename: "Chat",
+    id: string,
+    content?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetTodoQueryVariables = {
   id: string,
 };
@@ -236,6 +316,40 @@ export type ListTodosQuery = {
       id: string,
       name: string,
       description?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetChatQueryVariables = {
+  id: string,
+};
+
+export type GetChatQuery = {
+  getChat?:  {
+    __typename: "Chat",
+    id: string,
+    content?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListChatsQueryVariables = {
+  filter?: ModelChatFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListChatsQuery = {
+  listChats?:  {
+    __typename: "ModelChatConnection",
+    items:  Array< {
+      __typename: "Chat",
+      id: string,
+      content?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -327,24 +441,5 @@ export type OnDeleteChatSubscription = {
     content?: string | null,
     createdAt: string,
     updatedAt: string,
-  } | null,
-};
-
-export type ListChatQueryVariables = {
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListChatQuery = {
-  listChats?:  {
-    __typename: "ModelChatConnection",
-    items:  Array< {
-      __typename: "Chat",
-      id: string,
-      content: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
   } | null,
 };

@@ -30,15 +30,14 @@
 <script lang="ts">
 import { API, graphqlOperation } from 'aws-amplify';
 import { createTodo, createChat } from '../graphql/mutations';
-import { getChat, listChats } from '../graphql/queries'
+import { listChats } from '../graphql/queries'
 import { onCreateChat } from '../graphql/subscriptions'
-import { ListChatQuery, OnCreateChatSubscription, Chat } from '../API'
+import { ListChatsQuery, OnCreateChatSubscription, Chat } from '../API'
 import { defineComponent, onMounted, ref, watch } from 'vue';
 import { Authenticator } from "@aws-amplify/ui-vue";
 import { IonButton } from '@ionic/vue';
 import "@aws-amplify/ui-vue/styles.css";
-import Observable from 'zen-observable-ts';
-import { getHeapCodeStatistics } from 'v8';
+
 export default defineComponent({
   name: 'ExploreContainer',
   props: {
@@ -73,27 +72,31 @@ export default defineComponent({
     onMounted(async() => {
       const chatMessage = await API.graphql(graphqlOperation(listChats));
       if ('data' in chatMessage && chatMessage.data) {
-        const chats = chatMessage.data as ListChatQuery
+        const chats = chatMessage.data as ListChatsQuery
         if (chats.listChats) {
           messages.value = chats.listChats.items as Chat[]
         }
       }
       console.log(chatMessage)
-    })
+    }),
 
-  
-    const client = API.graphql(graphqlOperation(onCreateChat));
-    if ("subscribe" in client) {
-      client.subscribe({
-        next: ({ value: { data } }: ChatSubscriptionEvent) => {
-          if (data.onCreateChat) {
-            const chat: Chat = data.onCreateChat;
-            // setPosts(prev => [...prev, post]);
-            messages.value?.push(chat)
-          }
-        }
-      });
-    }
+    (() => {
+      const client = API.graphql({
+        query: onCreateChat,
+        authMode: 'API_KEY',
+      })
+      if ("subscribe" in client) {
+        client.subscribe({
+          next: ({ value: { data } }: ChatSubscriptionEvent) => {
+            if (data.onCreateChat) {
+              const chat: Chat = data.onCreateChat;
+              messages.value?.push(chat)
+            }
+          },
+          error: (error: any) => console.warn(error)
+        });
+      }
+    })()
     return {
       taskName,
       addTask,

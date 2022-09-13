@@ -2,16 +2,19 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
+        <!-- iOSにおいて通常のtitle -->
+        <!-- iOSで適用されないヘッダー -->
         <ion-title>Tab だよ!</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
+      <!-- iOSにおいてlarge-title -->
+      <!-- iOSで適用されるヘッダー -->
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Tab 1</ion-title>
+          <ion-title size="large">Tab 1です！ 変更しました</ion-title>
         </ion-toolbar>
       </ion-header>
-    
       <ExploreContainer name="Tab 1 page" />
       <ion-grid>
         <ion-row>

@@ -7,23 +7,38 @@
         <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
       </div>
       <div id="app">
-        <h1>Todo App</h1>
-        <input type="text" v-model="taskName" placeholder="Todo name">
-        <button @click="createTodos">Create Todo</button>
+        <div>
+          <h1>Todo App</h1>
+          <input type="text" v-model="taskName" placeholder="Todo name">
+          <button @click="addTask">Create Todo</button>
+        </div>
+        <div>
+          <h1>Chat App</h1>
+          <input type="text" v-model="content" placeholder="Todo name">
+          <button @click="addContent">送信</button>
+          <ul>
+            <li v-for="message in messages" :key="message.id">
+              {{message.value}}
+            </li>
+          </ul>
+        </div>
       </div>
     </template>
   </authenticator>
 </template>
 
 <script lang="ts">
-  import { API } from 'aws-amplify';
-import { createTodo } from '../graphql/mutations';
-
-import { defineComponent, ref } from 'vue';
+import { API, graphqlOperation } from 'aws-amplify';
+import { createTodo, createChat } from '../graphql/mutations';
+import { getChat } from '../graphql/queries'
+import { onCreateChat } from '../graphql/subscriptions'
+import { Chat } from '../API'
+import { defineComponent, onMounted, ref, watch } from 'vue';
 import { Authenticator } from "@aws-amplify/ui-vue";
 import { IonButton } from '@ionic/vue';
 import "@aws-amplify/ui-vue/styles.css";
-
+import Observable from 'zen-observable-ts';
+import { getHeapCodeStatistics } from 'v8';
 export default defineComponent({
   name: 'ExploreContainer',
   props: {
@@ -35,7 +50,7 @@ export default defineComponent({
   },
   setup () {
     const taskName = ref('')
-    const createTodos = async() => {
+    const addTask = async() => {
       console.log(taskName.value)
       if(!taskName.value) return 
       await API.graphql({
@@ -44,9 +59,39 @@ export default defineComponent({
       });
       taskName.value = ''
     }
+    const content = ref('')
+    const addContent = async() => {
+      if(!content.value) return
+      await API.graphql({
+        query: createChat,
+        variables: {input: {content: content.value}}
+      })
+      content.value = ''
+    }
+    const message = ref('')
+    onMounted(async() => {
+      const chatMessage = await API.graphql({
+        query: getChat,
+        variables: {id: 'f4d8f6ba-91cd-4237-9def-87192344fbb6'}
+      })
+      console.log(chatMessage)
+      message.value = chatMessage.data?.getChat.content
+    })
+    // watch(() => {
+    //   const subscription = await API.graphql(
+    //    graphqlOperation(onCreateChat)
+    //   ).subscribe({
+    //    next: (contentData: string) => {
+    //      console.log(contentData)
+    //    }
+    //   }) as Observable<any>
+    // })
     return {
       taskName,
-      createTodos,
+      addTask,
+      content,
+      addContent
+
     }
   }
 });

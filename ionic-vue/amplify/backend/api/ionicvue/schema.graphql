@@ -7,3 +7,8 @@ type Todo @model {
   name: String!
   description: String
 }
+
+type Chat @model {
+  id: ID!
+  content: String
+}

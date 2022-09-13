@@ -17,8 +17,8 @@
           <input type="text" v-model="content" placeholder="Todo name">
           <button @click="addContent">送信</button>
           <ul>
-            <li v-for="message in messages" :key="message.id">
-              {{message.value}}
+            <li v-for="message in messages" :key="message?.id">
+              {{ message.content }}
             </li>
           </ul>
         </div>
@@ -30,9 +30,9 @@
 <script lang="ts">
 import { API, graphqlOperation } from 'aws-amplify';
 import { createTodo, createChat } from '../graphql/mutations';
-import { getChat } from '../graphql/queries'
+import { getChat, listChats } from '../graphql/queries'
 import { onCreateChat } from '../graphql/subscriptions'
-import { Chat } from '../API'
+import { ListChatQuery, OnCreateChatSubscription, Chat } from '../API'
 import { defineComponent, onMounted, ref, watch } from 'vue';
 import { Authenticator } from "@aws-amplify/ui-vue";
 import { IonButton } from '@ionic/vue';
@@ -49,6 +49,7 @@ export default defineComponent({
     IonButton
   },
   setup () {
+    type ChatSubscriptionEvent = { value: { data: OnCreateChatSubscription } };
     const taskName = ref('')
     const addTask = async() => {
       console.log(taskName.value)
@@ -68,30 +69,37 @@ export default defineComponent({
       })
       content.value = ''
     }
-    const message = ref('')
+    const messages = ref<Chat[]>()
     onMounted(async() => {
-      const chatMessage = await API.graphql({
-        query: getChat,
-        variables: {id: 'f4d8f6ba-91cd-4237-9def-87192344fbb6'}
-      })
+      const chatMessage = await API.graphql(graphqlOperation(listChats));
+      if ('data' in chatMessage && chatMessage.data) {
+        const chats = chatMessage.data as ListChatQuery
+        if (chats.listChats) {
+          messages.value = chats.listChats.items as Chat[]
+        }
+      }
       console.log(chatMessage)
-      message.value = chatMessage.data?.getChat.content
     })
-    // watch(() => {
-    //   const subscription = await API.graphql(
-    //    graphqlOperation(onCreateChat)
-    //   ).subscribe({
-    //    next: (contentData: string) => {
-    //      console.log(contentData)
-    //    }
-    //   }) as Observable<any>
-    // })
+
+  
+    const client = API.graphql(graphqlOperation(onCreateChat));
+    if ("subscribe" in client) {
+      client.subscribe({
+        next: ({ value: { data } }: ChatSubscriptionEvent) => {
+          if (data.onCreateChat) {
+            const chat: Chat = data.onCreateChat;
+            // setPosts(prev => [...prev, post]);
+            messages.value?.push(chat)
+          }
+        }
+      });
+    }
     return {
       taskName,
       addTask,
       content,
-      addContent
-
+      addContent,
+      messages
     }
   }
 });
